@@ -1,0 +1,46 @@
+title: シナリオテスト
+plugins:
+  grpc: todo.so
+vars:
+  client: "{{plugins.grpc.NewToDoServiceClient()}}"
+steps:
+  - title: Create task
+    protocol: gRPC
+    request:
+      client: "{{vars.client}}"
+      method: CreateTask
+      body:
+        name: "do hoge hoge"
+        status: "STATUS_TODO"
+    expect:
+      code: 0
+      body:
+        id: "{{response.id}}"
+        name: "do hoge hoge"
+        status: "STATUS_TODO"
+
+  - title: Update task status
+    protocol: gRPC
+    request:
+      client: "{{vars.client}}"
+      method: UpdateTaskStatus
+      body:
+        id: "{{request.id}}"
+        status: "STATUS_DOING"
+    expect:
+      code: 0
+      body:
+        id: "{{response.id}}"
+        status: "STATUS_DOING"
+
+  - title: Delete task
+    protocol: gRPC
+    request:
+      client: "{{vars.client}}"
+      method: DeleteTask
+      body:
+        id: "{{request.id}}"
+    expect:
+      code: 0
+      body:
+        id: "{{response.id}}"

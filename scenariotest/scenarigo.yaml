@@ -5,5 +5,5 @@ scenarios:
 
 pluginDirectory: ./gen
 plugins:
-  greet.so:
+  todo.so:
     src: ./plugins
