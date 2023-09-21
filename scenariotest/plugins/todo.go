@@ -25,7 +25,7 @@ func newConn(target string) *grpc.ClientConn {
 	return conn
 }
 
-func NewGreetServiceClient() todov1.ToDoServiceClient {
+func NewToDoServiceServiceClient() todov1.ToDoServiceClient {
 	conn := newConn("localhost:8080")
 	return todov1.NewToDoServiceClient(conn)
 }
