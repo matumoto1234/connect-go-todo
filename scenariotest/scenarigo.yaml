@@ -1,0 +1,9 @@
+schemaVersion: config/v1
+
+scenarios:
+  - "scenarios"
+
+pluginDirectory: ./gen
+plugins:
+  greet.so:
+    src: ./plugins
