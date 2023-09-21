@@ -4,24 +4,34 @@ package todo.v1;
 
 option go_package = "github.com/matumoto1234/connect-go-todo/gen/todo/v1;todov1";
 
-message CreateTaskRequest {
-  string name = 1;
-  enum Status {
+enum Status {
     TODO = 1;
     DOING = 2;
     DONE = 3;
   }
+
+message CreateTaskRequest {
+  string name = 1;
+  Status status = 2;
 }
 
 message CreateTaskResponse {
   string name = 1;
-  enum Status {
-    TODO = 1;
-    DOING = 2;
-    DONE = 3;
-  }
+  string id = 2;
+  Status status = 3;
+}
+
+message UpdateTaskStatusRequest {
+  string id = 1;
+  Status status = 2;
+}
+
+message UpdateTaskStatusResponse {
+  string id = 1;
+  Status status = 2;
 }
 
 service GreetService {
   rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse) {}
+  rpc UpdateTaskStatus(UpdateTaskStatusRequest) returns (UpdateTaskStatusResponse) {}
 }
