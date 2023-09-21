@@ -5,10 +5,11 @@ package todo.v1;
 option go_package = "github.com/matumoto1234/connect-go-todo/gen/todo/v1;todov1";
 
 enum Status {
-    TODO = 1;
-    DOING = 2;
-    DONE = 3;
-  }
+  _ = 0;
+  TODO = 1;
+  DOING = 2;
+  DONE = 3;
+}
 
 message CreateTaskRequest {
   string name = 1;
@@ -31,7 +32,16 @@ message UpdateTaskStatusResponse {
   Status status = 2;
 }
 
+message DeleteTaskRequest {
+  string id = 1;
+}
+
+message DeleteTaskResponse {
+  string id = 1;
+}
+
 service GreetService {
   rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse) {}
   rpc UpdateTaskStatus(UpdateTaskStatusRequest) returns (UpdateTaskStatusResponse) {}
+  rpc DeleteTask(DeleteTaskRequest) returns (DeleteTaskResponse) {}
 }
